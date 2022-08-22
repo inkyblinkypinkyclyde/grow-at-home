@@ -1,19 +1,14 @@
-from secrets import choice
 from pump_runner import PumpControl
 
 PumpControl.setup()
-while True:
-    choice = int(input('select a pump to run: '))
-    if choice == 1:
-        PumpControl.pump1_run_for(1)
-    if choice == 2:
-        PumpControl.pump2_run_for(1)
-    if choice == 3:
-        PumpControl.pump3_run_for(1)
-    if choice == 4:
-        PumpControl.pump4_run_for(1)
-    if choice == 0:
-        break
-    
-
-PumpControl.cleanup()
+try:
+    while True:
+        option = int(input('select a pump to run or press 0 to exit:'))
+        if option > 0 and option < 5:
+            PumpControl.run_pump_for_given_time(option, 1)
+        elif option == 0:
+            break
+except KeyboardInterrupt:
+    PumpControl.cleanup()
+finally:
+    PumpControl.cleanup()
