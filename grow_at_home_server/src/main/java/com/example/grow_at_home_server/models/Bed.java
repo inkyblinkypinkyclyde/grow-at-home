@@ -19,19 +19,19 @@ public class Bed {
     @Column(name = "column")
     private int reservoirCapacity;
     @JsonBackReference
-    @OneToMany(mappedBy = "plant", fetch = FetchType.LAZY)
-    private List<WaterSensorEvent> waterSensorEvents;
+    @OneToMany(mappedBy = "bed", fetch = FetchType.LAZY)
+    private List<WaterSensorReservoirEvent> waterSensorReservoirEvents;
     @JsonIgnoreProperties({"beds"})
     @ManyToOne
     @JoinColumn(name = "garden_id", nullable = false)
     private Garden garden;
 
 
-    public Bed(String name, List<Plant> plants, int reservoirCapacity, List<WaterSensorEvent> waterSensorEvents, Garden garden) {
+    public Bed(String name, List<Plant> plants, int reservoirCapacity, List<WaterSensorReservoirEvent> waterSensorReservoirEvents, Garden garden) {
         this.name = name;
         this.plants = plants;
         this.reservoirCapacity = reservoirCapacity;
-        this.waterSensorEvents = waterSensorEvents;
+        this.waterSensorReservoirEvents = waterSensorReservoirEvents;
         this.garden = garden;
     }
 
@@ -82,15 +82,15 @@ public class Bed {
         this.reservoirCapacity = reservoirCapacity;
     }
 
-    public List<WaterSensorEvent> getWaterSensorEvents() {
-        return waterSensorEvents;
+    public List<WaterSensorReservoirEvent> getWaterSensorReservoirEvents() {
+        return waterSensorReservoirEvents;
     }
 
-    public void setWaterSensorEvents(List<WaterSensorEvent> waterSensorEvents) {
-        this.waterSensorEvents = waterSensorEvents;
+    public void setWaterSensorReservoirEvents(List<WaterSensorReservoirEvent> waterSensorReservoirEvents) {
+        this.waterSensorReservoirEvents = waterSensorReservoirEvents;
     }
 
-    public void addWaterSensorEvent(WaterSensorEvent waterSensorEvent){
-        this.waterSensorEvents.add(waterSensorEvent);
+    public void addWaterSensorReservoirEvent(WaterSensorReservoirEvent waterSensorReservoirEvent){
+        this.waterSensorReservoirEvents.add(waterSensorReservoirEvent);
     }
 }
