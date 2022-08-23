@@ -3,6 +3,7 @@ package com.example.grow_at_home_server.models;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 @Entity
 @Table(name = "waterEvents")
@@ -21,11 +22,23 @@ public class WaterEvent {
     @JoinColumn(name = "plant_id", nullable = false)
     private Plant plant;
 
-    public WaterEvent(LocalDateTime eventDateTime, int duration, boolean success, Plant plant) {
-        this.eventDateTime = eventDateTime;
+    public WaterEvent(String eventDateTime, int duration, boolean success, Plant plant) {
+        this.eventDateTime = this.formatDateAndTime(eventDateTime);
         this.duration = duration;
         this.success = success;
         this.plant = plant;
+    }
+
+    private LocalDateTime formatDateAndTime(String givenDateTime) {
+        String[] splitString = givenDateTime.split("[/ :]");
+        LocalDateTime newDateTime =  LocalDateTime.of(
+                Integer.parseInt(splitString[0]),
+                Integer.parseInt(splitString[1]),
+                Integer.parseInt(splitString[2]),
+                Integer.parseInt(splitString[3]),
+                Integer.parseInt(splitString[4]),
+                Integer.parseInt(splitString[5]));
+        return newDateTime;
     }
 
     public WaterEvent() {

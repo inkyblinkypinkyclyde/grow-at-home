@@ -1,8 +1,10 @@
 package com.example.grow_at_home_server.models;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 @Entity
 @Table(name = "gardens")
@@ -12,13 +14,13 @@ public class Garden {
     private Long id;
     @Column(name ="name")
     private String name;
-    @JsonBackReference
+    @JsonIgnoreProperties({"garden"})
     @OneToMany(mappedBy = "garden", fetch = FetchType.LAZY)
     private List<Bed> beds;
 
-    public Garden(String name, List<Bed> beds) {
+    public Garden(String name) {
         this.name = name;
-        this.beds = beds;
+        this.beds = new ArrayList<>();
     }
 
     public Garden() {

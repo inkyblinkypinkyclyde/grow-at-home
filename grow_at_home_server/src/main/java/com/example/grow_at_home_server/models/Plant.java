@@ -4,6 +4,9 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.*;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 @Entity
@@ -26,13 +29,13 @@ public class Plant {
     @Column(name ="units")
     private Units units;
     @Column(name ="dateAdded")
-    private Date dateAdded;
+    private LocalDate dateAdded;
     @Column(name ="dateRemoved")
-    private Date dateRemoved;
-    @JsonBackReference
+    private LocalDate dateRemoved;
+    @JsonIgnoreProperties({"plant"})
     @OneToMany(mappedBy = "plant", fetch = FetchType.LAZY)
     private List<WaterSensorEvent> waterSensorEvents;
-    @JsonBackReference
+    @JsonIgnoreProperties({"plant"})
     @OneToMany(mappedBy = "plant", fetch = FetchType.LAZY)
     private List<WaterEvent> waterEvents;
     @JsonIgnoreProperties({"plants"})
@@ -40,22 +43,35 @@ public class Plant {
     @JoinColumn(name = "bed_id", nullable = false)
     private Bed bed;
 
-    public Plant(String name, String species, String tag, String produces, List<Harvest> harvests, Units units, Date dateAdded, Date dateRemoved, List<WaterSensorEvent> waterSensorEvents, List<WaterEvent> waterEvents, Bed bed) {
+    public Plant(String name, String species, String tag, String produces, Units units, String dateAdded, Bed bed) {
         this.name = name;
         this.species = species;
         this.tag = tag;
         this.produces = produces;
-        this.harvests = harvests;
+        this.harvests = new ArrayList<>();
         this.units = units;
-        this.dateAdded = dateAdded;
-        this.dateRemoved = dateRemoved;
-        this.waterSensorEvents = waterSensorEvents;
-        this.waterEvents = waterEvents;
+        this.dateAdded = this.formatDate(dateAdded);
+        this.dateRemoved = null;
+        this.waterSensorEvents = new ArrayList<>();
+        this.waterEvents = new ArrayList<>();
         this.bed = bed;
     }
 
     public Plant() {
     }
+
+    public LocalDate formatDate(String givenDate) {
+        if (givenDate == null){
+            return null;
+        }
+        String[] splitString = givenDate.split("/");
+        LocalDate newDate =  LocalDate.of(
+                Integer.parseInt(splitString[0]),
+                Integer.parseInt(splitString[1]),
+                Integer.parseInt(splitString[2]));
+        return newDate;
+    }
+
 
     public long getId() {
         return id;
@@ -117,20 +133,20 @@ public class Plant {
         this.units = units;
     }
 
-    public Date getDateAdded() {
+    public LocalDate getDateAdded() {
         return dateAdded;
     }
 
-    public void setDateAdded(Date dateAdded) {
-        this.dateAdded = dateAdded;
+    public void setDateAdded(String dateAdded) {
+        this.dateAdded = this.formatDate(dateAdded);
     }
 
-    public Date getDateRemoved() {
+    public LocalDate getDateRemoved() {
         return dateRemoved;
     }
 
-    public void setDateRemoved(Date dateRemoved) {
-        this.dateRemoved = dateRemoved;
+    public void setDateRemoved(String dateRemoved) {
+        this.dateRemoved = this.formatDate(dateRemoved);
     }
 
     public List<WaterSensorEvent> getWaterSensorEvents() {

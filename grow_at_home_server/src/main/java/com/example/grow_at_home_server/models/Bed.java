@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 @Entity
 @Table(name = "beds")
@@ -13,12 +14,12 @@ public class Bed {
     private Long id;
     @Column(name ="name")
     private String name;
-    @JsonBackReference
+    @JsonIgnoreProperties({"bed"})
     @OneToMany(mappedBy = "bed", fetch = FetchType.LAZY)
     private List<Plant> plants;
     @Column(name = "column")
     private int reservoirCapacity;
-    @JsonBackReference
+    @JsonIgnoreProperties({"bed"})
     @OneToMany(mappedBy = "bed", fetch = FetchType.LAZY)
     private List<WaterSensorReservoirEvent> waterSensorReservoirEvents;
     @JsonIgnoreProperties({"beds"})
@@ -27,11 +28,11 @@ public class Bed {
     private Garden garden;
 
 
-    public Bed(String name, List<Plant> plants, int reservoirCapacity, List<WaterSensorReservoirEvent> waterSensorReservoirEvents, Garden garden) {
+    public Bed(String name, int reservoirCapacity, Garden garden) {
         this.name = name;
-        this.plants = plants;
+        this.plants = new ArrayList<>();
         this.reservoirCapacity = reservoirCapacity;
-        this.waterSensorReservoirEvents = waterSensorReservoirEvents;
+        this.waterSensorReservoirEvents = new ArrayList<>();
         this.garden = garden;
     }
 
