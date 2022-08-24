@@ -1,20 +1,26 @@
 import React from "react"
-import Bed from "./Bed"
+import styled from "styled-components"
 
-const Garden = ({ garden }) => {
-    const allBeds = garden.beds.map((bed) => {
-        return (
-            <Bed
-                key={bed.id}
-                bed={bed}
-            />
-        )
-    })
+const ClickableDiv = styled.div`
+background-color: aquamarine;
+`
+
+const GardenDiv = styled.div`
+margin: 0.25rem;
+padding: 0.25rem;
+`
+
+const Garden = ({ garden, onGardenClick }) => {
+    const handleClick = () => {
+        onGardenClick(garden)
+    }
     return (
-        <div>
-            <h2>I am a garden and my name is: {garden.name}</h2>
-            {allBeds}
-        </div>
+        <ClickableDiv onClick={handleClick}>
+            <GardenDiv>
+                <h3>{garden.name}</h3>
+                <h3>Number of beds: {garden.beds.length}</h3>
+            </GardenDiv>
+        </ClickableDiv>
     )
 }
 
