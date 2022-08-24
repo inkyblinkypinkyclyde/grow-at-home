@@ -67,6 +67,14 @@ public class DataLoader implements ApplicationRunner {
         plantRepository.save(plant10);
         WaterEvent waterEvent01 = new WaterEvent("2022/8/23 12:30:00", 5, true, plant07);
         waterEventRepository.save(waterEvent01);
+        WaterEvent waterEvent02 = new WaterEvent("2022/8/23 13:30:00", 5, true, plant07);
+        waterEventRepository.save(waterEvent02);
+        WaterEvent waterEvent03 = new WaterEvent("2022/8/23 17:30:00", 5, true, plant07);
+        waterEventRepository.save(waterEvent03);
+        WaterEvent waterEvent04 = new WaterEvent("2020/8/23 10:30:00", 5, true, plant07);
+        waterEventRepository.save(waterEvent04);
+        WaterEvent waterEvent05 = new WaterEvent("2022/8/23 17:30:00", 5, true, plant07);
+        waterEventRepository.save(waterEvent05);
 
 
 
