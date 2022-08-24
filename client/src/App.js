@@ -4,7 +4,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
 import Home from './components/Home';
 import NavBar from './components/NavBar';
-import Garden from './containers/Garden';
+import AllGardens from './containers/AllGardens';
 
 function App() {
   return (
@@ -12,7 +12,7 @@ function App() {
       <NavBar />
       <Routes>
         <Route exact path="/" element={< Home />} />
-        <Route exact path="/garden" element={< Garden />} />
+        <Route exact path="/garden" element={< AllGardens />} />
       </Routes>
     </Router>
   );
