@@ -1,4 +1,4 @@
-package com.example.grow_at_home_server;
+package com.example.grow_at_home_server.configs;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;

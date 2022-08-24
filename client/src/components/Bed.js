@@ -1,21 +1,24 @@
 import React from "react";
-import Plant from "./Plant";
+import styled from "styled-components"
 
-const Bed = ({ bed }) => {
+const ClickableDiv = styled.div`
+background-color: aquamarine;
+`
+const BedDiv = styled.div`
+margin: 0.25rem;
+padding: 0.25rem;
+`
+const Bed = ({ bed, onBedClick }) => {
+    const handleClick = () => {
+        onBedClick(bed)
+    }
 
-    const allPlants = bed.plants.map((plant) => {
-        return (
-            <Plant
-                key={plant.id}
-                plant={plant}
-            />
-        )
-    })
     return (
-        <div>
-            <h3>I'm a bed and my name is: {bed.name}</h3>
-            {allPlants}
-        </div>
+        <ClickableDiv onClick={handleClick}>
+            <BedDiv>
+                <h3>{bed.name}</h3>
+            </BedDiv>
+        </ClickableDiv>
     )
 }
 
