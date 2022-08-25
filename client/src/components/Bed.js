@@ -17,6 +17,7 @@ const Bed = ({ bed, onBedClick }) => {
         <ClickableDiv onClick={handleClick}>
             <BedDiv>
                 <h3>{bed.name}</h3>
+                <h3>Reservoir Capacity: {bed.reservoirCapacity}</h3>
             </BedDiv>
         </ClickableDiv>
     )

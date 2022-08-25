@@ -23,6 +23,7 @@ public class Bed {
     @OneToMany(mappedBy = "bed", fetch = FetchType.LAZY)
     private List<WaterSensorReservoirEvent> waterSensorReservoirEvents;
     @JsonIgnoreProperties({"beds"})
+//    @JsonBackReference
     @ManyToOne
     @JoinColumn(name = "garden_id", nullable = false)
     private Garden garden;

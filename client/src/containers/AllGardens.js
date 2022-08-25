@@ -5,6 +5,8 @@ import Bed from "../components/Bed"
 import Plant from "../components/Plant"
 import WaterEvent from "../components/WaterEvent"
 import NewGarden from "../components/NewGarden"
+import NewBed from "../components/NewBed"
+import NewPlant from "../components/NewPlant"
 
 const ScrollContainer = styled.div`
 display: grid;
@@ -37,6 +39,34 @@ const AllGardens = () => {
             .then(gardens => setGardens(gardens));
     }
 
+
+
+    const handleGardenSubmit = newGarden => {
+        fetch('http://localhost:8080/gardens', {
+            method: 'POST',
+            body: JSON.stringify(newGarden),
+            headers: { 'content-type': 'application/json' }
+        })
+            .then(() => fetchGardens())
+    }
+
+    const handleBedSubmit = newBed => {
+        fetch('http://localhost:8080/beds', {
+            method: 'POST',
+            body: JSON.stringify(newBed),
+            headers: { 'content-type': 'application/json' }
+        })
+            .then(() => fetchGardens())
+    }
+    const handlePlantSubmit = newPlant => {
+        fetch('http://localhost:8080/plants', {
+            method: 'POST',
+            body: JSON.stringify(newPlant),
+            headers: { 'content-type': 'application/json' }
+        })
+            .then(() => fetchGardens())
+    }
+
     const onGardenClick = (garden) => {
         setCurrentGarden(garden)
         setCurrentBed(null)
@@ -55,19 +85,23 @@ const AllGardens = () => {
     const myGardens = gardens.map((garden) => {
         return (
             <div key={garden.id}>
-                <Garden onGardenClick={onGardenClick} garden={garden} key={garden.id} />
+                <Garden onGardenClick={onGardenClick} garden={garden} key={garden.id} currentGarden={currentGarden} />
             </div>
         )
     })
+
     const myBeds = () => {
         if (currentGarden) {
-            return currentGarden.beds.map((bed) => {
-                return (
-                    <div key={bed.id}>
-                        <Bed bed={bed} key={bed.id} onBedClick={onBedClick} />
-                    </div>
-                )
-            })
+            const gardenForMap = gardens.find((garden) => garden.id === currentGarden.id)
+            if (gardenForMap) {
+                return gardenForMap.beds.map((bed) => {
+                    return (
+                        <div key={bed.id}>
+                            <Bed bed={bed} onBedClick={onBedClick} />
+                        </div>
+                    )
+                })
+            }
         }
     }
     const myPlants = () => {
@@ -100,13 +134,15 @@ const AllGardens = () => {
             <ScrollContainer>
                 <ColumnDiv>
                     {myGardens}
-                    <NewGarden />
+                    <NewGarden onGardenSubmit={handleGardenSubmit} />
                 </ColumnDiv>
                 <ColumnDiv>
                     {myBeds()}
+                    {currentGarden ? <NewBed onBedSubmit={handleBedSubmit} currentGarden={currentGarden} /> : null}
                 </ColumnDiv>
                 <ColumnDiv>
                     {myPlants()}
+                    {currentBed ? <NewPlant onPlantSubmit={handlePlantSubmit} currentGarden={currentGarden} currentBed={currentBed} /> : null}
                 </ColumnDiv>
                 <ColumnDiv>
                     {myWaterEvents()}
