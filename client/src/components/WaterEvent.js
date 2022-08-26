@@ -17,8 +17,6 @@ const WaterEvent = ({ waterEvent }) => {
                 <p>Amount: {waterEvent.duration}0ml</p>
             </WaterDiv>
         </ClickableDiv>
-
-
     )
 }
 export default WaterEvent

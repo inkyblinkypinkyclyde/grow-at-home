@@ -3,6 +3,7 @@ package com.example.grow_at_home_server.models;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
+
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -15,7 +16,7 @@ public class Garden {
     @Column(name ="name")
     private String name;
     @JsonIgnoreProperties({"garden"})
-    @OneToMany(mappedBy = "garden", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "garden", fetch = FetchType.LAZY, cascade = CascadeType.REMOVE, orphanRemoval = true)
     private List<Bed> beds;
 
     public Garden(String name) {

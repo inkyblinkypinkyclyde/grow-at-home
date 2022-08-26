@@ -3,7 +3,6 @@ package com.example.grow_at_home_server.models;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.*;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 @Entity
 @Table(name = "waterEvents")
@@ -30,7 +29,7 @@ public class WaterEvent {
     }
 
     private LocalDateTime formatDateAndTime(String givenDateTime) {
-        String[] splitString = givenDateTime.split("[/ :]");
+        String[] splitString = givenDateTime.split("[- :]");
         LocalDateTime newDateTime =  LocalDateTime.of(
                 Integer.parseInt(splitString[0]),
                 Integer.parseInt(splitString[1]),

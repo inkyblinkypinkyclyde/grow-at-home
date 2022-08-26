@@ -1,6 +1,7 @@
 import React from "react"
 import styled from "styled-components"
 
+
 const ClickableDiv = styled.div`
 background-color: aquamarine;
 `
@@ -10,7 +11,7 @@ margin: 0.25rem;
 padding: 0.25rem;
 `
 
-const Garden = ({ garden, onGardenClick }) => {
+const Garden = ({ garden, onGardenClick, currentGarden }) => {
     const handleClick = () => {
         onGardenClick(garden)
     }

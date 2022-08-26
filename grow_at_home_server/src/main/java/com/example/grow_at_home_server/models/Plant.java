@@ -5,9 +5,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.*;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 @Entity
 @Table(name = "plants")
@@ -23,7 +21,7 @@ public class Plant {
     private String tag;
     @Column(name ="produces")
     private String produces;
-    @JsonBackReference
+    @JsonIgnoreProperties({"plant"})
     @OneToMany(mappedBy = "plant", fetch = FetchType.LAZY)
     private List<Harvest> harvests;
     @Column(name ="units")
@@ -32,11 +30,11 @@ public class Plant {
     private LocalDate dateAdded;
     @Column(name ="dateRemoved")
     private LocalDate dateRemoved;
+//    @JsonIgnoreProperties({"plant"})
+//    @OneToMany(mappedBy = "plant", fetch = FetchType.LAZY, cascade = CascadeType.REMOVE, orphanRemoval = true)
+//    private List<WaterSensorEvent> waterSensorEvents;
     @JsonIgnoreProperties({"plant"})
-    @OneToMany(mappedBy = "plant", fetch = FetchType.LAZY)
-    private List<WaterSensorEvent> waterSensorEvents;
-    @JsonIgnoreProperties({"plant"})
-    @OneToMany(mappedBy = "plant", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "plant", fetch = FetchType.LAZY, cascade = CascadeType.REMOVE, orphanRemoval = true)
     private List<WaterEvent> waterEvents;
     @JsonIgnoreProperties({"plants"})
     @ManyToOne
@@ -52,7 +50,7 @@ public class Plant {
         this.units = units;
         this.dateAdded = this.formatDate(dateAdded);
         this.dateRemoved = null;
-        this.waterSensorEvents = new ArrayList<>();
+//        this.waterSensorEvents = new ArrayList<>();
         this.waterEvents = new ArrayList<>();
         this.bed = bed;
     }
@@ -61,10 +59,11 @@ public class Plant {
     }
 
     public LocalDate formatDate(String givenDate) {
+        System.out.println(givenDate);
         if (givenDate == null){
             return null;
         }
-        String[] splitString = givenDate.split("/");
+        String[] splitString = givenDate.split("-");
         LocalDate newDate =  LocalDate.of(
                 Integer.parseInt(splitString[0]),
                 Integer.parseInt(splitString[1]),
@@ -149,17 +148,17 @@ public class Plant {
         this.dateRemoved = this.formatDate(dateRemoved);
     }
 
-    public List<WaterSensorEvent> getWaterSensorEvents() {
-        return waterSensorEvents;
-    }
+//    public List<WaterSensorEvent> getWaterSensorEvents() {
+//        return waterSensorEvents;
+//    }
 
-    public void setWaterSensorEvents(List<WaterSensorEvent> waterSensorEvents) {
-        this.waterSensorEvents = waterSensorEvents;
-    }
+//    public void setWaterSensorEvents(List<WaterSensorEvent> waterSensorEvents) {
+//        this.waterSensorEvents = waterSensorEvents;
+//    }
 
-    public void addWaterSensorEvent(WaterSensorEvent waterSensorEvent){
-        this.waterSensorEvents.add(waterSensorEvent);
-    }
+//    public void addWaterSensorEvent(WaterSensorEvent waterSensorEvent){
+//        this.waterSensorEvents.add(waterSensorEvent);
+//    }
 
     public List<WaterEvent> getWaterEvents() {
         return waterEvents;

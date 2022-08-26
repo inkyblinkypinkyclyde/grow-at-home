@@ -29,4 +29,11 @@ public class BedController {
         bedRepository.save(bed);
         return new ResponseEntity<>(bed, HttpStatus.OK);
     }
+
+    @DeleteMapping(value = "/beds/{id}")
+    public ResponseEntity<List<Bed>> deleteBed(@PathVariable Long id){
+        Bed found = bedRepository.getOne(id);
+        bedRepository.delete(found);
+        return new ResponseEntity<>(bedRepository.findAll(), HttpStatus.OK );
+    }
 }
