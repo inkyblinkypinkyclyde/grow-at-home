@@ -13,13 +13,17 @@ public class WaterSensorReservoirEvent {
     private Long id;
     @Column(name = "datetime")
     private LocalDateTime eventDateTime;
+
+    @Column(name = "wet")
+    private boolean wet;
     @JsonIgnoreProperties({"waterSensorReservoirEvents"})
     @ManyToOne
     @JoinColumn(name = "bed_id", nullable = false)
     private Bed bed;
 
-    public WaterSensorReservoirEvent(LocalDateTime eventDateTime, Bed bed) {
+    public WaterSensorReservoirEvent(LocalDateTime eventDateTime, boolean wet, Bed bed) {
         this.eventDateTime = eventDateTime;
+        this.wet = wet;
         this.bed = bed;
     }
 
@@ -28,6 +32,14 @@ public class WaterSensorReservoirEvent {
 
     public Long getId() {
         return id;
+    }
+
+    public boolean isWet() {
+        return wet;
+    }
+
+    public void setWet(boolean wet) {
+        this.wet = wet;
     }
 
     public void setId(Long id) {

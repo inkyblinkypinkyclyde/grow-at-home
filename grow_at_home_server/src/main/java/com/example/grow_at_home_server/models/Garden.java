@@ -16,8 +16,7 @@ public class Garden {
     @Column(name ="name")
     private String name;
     @JsonIgnoreProperties({"garden"})
-//    @JsonBackReference
-    @OneToMany(mappedBy = "garden", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "garden", fetch = FetchType.LAZY, cascade = CascadeType.REMOVE, orphanRemoval = true)
     private List<Bed> beds;
 
     public Garden(String name) {

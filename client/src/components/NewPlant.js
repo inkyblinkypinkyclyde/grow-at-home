@@ -33,14 +33,13 @@ const NewPlant = ({ onPlantSubmit, currentGarden, currentBed }) => {
         setName('')
         setSpecies('')
         setProduces('')
-        setDateAdded(new Date())
+        setDateAdded('')
     }
 
     const handleFormSubmit = (event) => {
         const bed = currentBed
         const garden = currentGarden
         const units = "INTEGERS"
-        const date = "2022-08-25"
         event.preventDefault()
         const payload = {
             name,
@@ -48,7 +47,7 @@ const NewPlant = ({ onPlantSubmit, currentGarden, currentBed }) => {
             bed,
             produces,
             units,
-            date
+            dateAdded
         }
         onPlantSubmit(payload)
         resetForm()
@@ -61,8 +60,8 @@ const NewPlant = ({ onPlantSubmit, currentGarden, currentBed }) => {
                     <input type="text" name="name" value={name} onChange={handleNameChange} placeholder="Name" />
                     <input type="text" name="species" value={species} onChange={handleSpeciesChange} placeholder="Species" />
                     <input type="text" name="produces" value={produces} onChange={handleProducesChange} placeholder="Produces" />
-                    {/* <input type="date" name="dateAdded" value={dateAdded} onChange={handleDateAddedChange} defaultValue={new Date()} /> */}
-                    <input type="submit" value="Add" />
+                    <input type="date" name="dateAdded" value={dateAdded} onChange={handleDateAddedChange} />
+                    <input type="submit" />
                 </form>
             </PlantDiv>
         </ClickableDiv>

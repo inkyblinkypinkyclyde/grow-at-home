@@ -29,4 +29,11 @@ public class GardenController {
         gardenRepository.save(garden);
         return new ResponseEntity<>(garden, HttpStatus.OK);
     }
+
+    @DeleteMapping(value = "/gardens/{id}")
+    public ResponseEntity<List<Garden>> deleteGarden(@PathVariable Long id){
+        Garden found = gardenRepository.getOne(id);
+        gardenRepository.delete(found);
+        return new ResponseEntity<>(gardenRepository.findAll(), HttpStatus.OK);
+    }
 }

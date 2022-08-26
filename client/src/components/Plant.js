@@ -24,9 +24,12 @@ padding: 0.25rem;
 background-color: brown;
 text-align: center;
 `
-const Plant = ({ plant, onPlantClick }) => {
-    const handleClick = () => {
-        onPlantClick(plant)
+const Plant = ({ plant, onWaterClick, onHarvestClick }) => {
+    const handleWaterClick = () => {
+        onWaterClick(plant)
+    }
+    const handleHarvestClick = () => {
+        onHarvestClick(plant)
     }
     return (
         <ClickableDiv>
@@ -35,11 +38,11 @@ const Plant = ({ plant, onPlantClick }) => {
                 <p><i>{plant.species}</i></p>
                 <p>Planted on: {plant.dateAdded}</p>
                 <OptionsDiv>
-                    <ShowWaterDiv onClick={handleClick}>
+                    <ShowWaterDiv onClick={handleWaterClick}>
                         <p>{plant.waterEvents.length} waterings</p>
                     </ShowWaterDiv>
-                    <ShowHarvestDiv>
-                        <p>0 harvests</p>
+                    <ShowHarvestDiv onClick={handleHarvestClick}>
+                        <p>{plant.harvests.length} harvests</p>
                     </ShowHarvestDiv>
                 </OptionsDiv>
             </PlantDiv>

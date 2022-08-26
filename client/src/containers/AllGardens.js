@@ -7,6 +7,8 @@ import WaterEvent from "../components/WaterEvent"
 import NewGarden from "../components/NewGarden"
 import NewBed from "../components/NewBed"
 import NewPlant from "../components/NewPlant"
+import HarvestEvents from "../components/HarvestEvents"
+import NewHarvestEvent from "../components/NewHarvestEvent"
 
 const ScrollContainer = styled.div`
 display: grid;
@@ -28,6 +30,7 @@ const AllGardens = () => {
     const [currentGarden, setCurrentGarden] = useState(null)
     const [currentBed, setCurrentBed] = useState(null)
     const [currentPlant, setCurrentPlant] = useState(null)
+    const [waterEventBool, setWaterEventBool] = useState(null)
 
     useEffect(() => {
         fetchGardens()
@@ -49,7 +52,6 @@ const AllGardens = () => {
         })
             .then(() => fetchGardens())
     }
-
     const handleBedSubmit = newBed => {
         fetch('http://localhost:8080/beds', {
             method: 'POST',
@@ -59,6 +61,7 @@ const AllGardens = () => {
             .then(() => fetchGardens())
     }
     const handlePlantSubmit = newPlant => {
+        console.log(newPlant)
         fetch('http://localhost:8080/plants', {
             method: 'POST',
             body: JSON.stringify(newPlant),
@@ -67,6 +70,14 @@ const AllGardens = () => {
             .then(() => fetchGardens())
     }
 
+    const handleHarvestSubmit = (NewHarvestEvent) => {
+        fetch('http://localhost:8080/harvests', {
+            method: 'POST',
+            body: JSON.stringify(NewHarvestEvent),
+            headers: { 'content-type': 'application/json' }
+        })
+            .then(() => fetchGardens())
+    }
     const onGardenClick = (garden) => {
         setCurrentGarden(garden)
         setCurrentBed(null)
@@ -78,8 +89,15 @@ const AllGardens = () => {
         setCurrentPlant(null)
     }
 
-    const onPlantClick = (plant) => {
+    const onWaterClick = (plant) => {
         setCurrentPlant(plant)
+        setWaterEventBool(true)
+    }
+
+    const onHarvestClick = (plant) => {
+        setCurrentPlant(plant)
+        setWaterEventBool(false)
+
     }
 
     const myGardens = gardens.map((garden) => {
@@ -93,31 +111,32 @@ const AllGardens = () => {
     const myBeds = () => {
         if (currentGarden) {
             const gardenForMap = gardens.find((garden) => garden.id === currentGarden.id)
-            if (gardenForMap) {
-                return gardenForMap.beds.map((bed) => {
-                    return (
-                        <div key={bed.id}>
-                            <Bed bed={bed} onBedClick={onBedClick} />
-                        </div>
-                    )
-                })
-            }
-        }
-    }
-    const myPlants = () => {
-        if (currentGarden && currentBed) {
-            return currentBed.plants.map((plant) => {
+            return gardenForMap.beds.map((bed) => {
                 return (
-                    <div key={plant.id}>
-                        <Plant plant={plant} onPlantClick={onPlantClick} />
+                    <div key={bed.id}>
+                        <Bed bed={bed} onBedClick={onBedClick} />
                     </div>
                 )
             })
         }
     }
+    const myPlants = () => {
+        if (currentGarden && currentBed) {
+            const gardenForMap = gardens.find((garden) => garden.id === currentGarden.id)
+            const bedForMap = gardenForMap.beds.find((bed) => bed.id === currentBed.id)
+            return bedForMap.plants.map((plant) => {
+                return (
+                    <div key={plant.id}>
+                        <Plant plant={plant} onWaterClick={onWaterClick} onHarvestClick={onHarvestClick} />
+                    </div>
+                )
+            })
+
+        }
+    }
 
     const myWaterEvents = () => {
-        if (currentGarden && currentBed && currentPlant) {
+        if (currentGarden && currentBed && currentPlant && waterEventBool) {
             return currentPlant.waterEvents.map((waterEvent) => {
                 return (
                     <div key={waterEvent.id} >
@@ -128,6 +147,37 @@ const AllGardens = () => {
         }
     }
 
+    const myHarvestEvents = () => {
+        if (currentGarden && currentBed && currentPlant) {
+            return currentPlant.harvests.map((harvest) => {
+                return (
+                    <div key={harvest.id} >
+                        <HarvestEvents harvest={harvest} />
+                    </div>
+                )
+            })
+        }
+    }
+
+    const plantEvents = () => {
+        if (currentPlant && waterEventBool) {
+            return myWaterEvents()
+        } else if (currentPlant && !waterEventBool) {
+            return (
+                <>
+                    {myHarvestEvents()}
+                    <NewHarvestEvent
+                        onHarvestSubmit={handleHarvestSubmit}
+                        currentGarden={currentGarden}
+                        currentBed={currentBed}
+                        currentPlant={currentPlant} />
+                </>
+            )
+        } else {
+            return null
+        }
+
+    }
     return (
         <div>
             <h1>All My Gardens</h1>
@@ -145,7 +195,7 @@ const AllGardens = () => {
                     {currentBed ? <NewPlant onPlantSubmit={handlePlantSubmit} currentGarden={currentGarden} currentBed={currentBed} /> : null}
                 </ColumnDiv>
                 <ColumnDiv>
-                    {myWaterEvents()}
+                    {plantEvents()}
                 </ColumnDiv>
             </ScrollContainer>
         </div>
