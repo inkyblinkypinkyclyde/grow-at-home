@@ -31,12 +31,33 @@ const Plant = ({ plant, onWaterClick, onHarvestClick }) => {
     const handleHarvestClick = () => {
         onHarvestClick(plant)
     }
+
+    const getLastThreeDaysOfWaterings = () => {
+        let wateringsForAverage = []
+        const todayUnixTime = Math.floor(new Date('2022-08-26').getTime() / 1000)
+        plant.waterEvents.map((waterEvent) => {
+            if (Math.floor(new Date(waterEvent.eventDateTime).getTime() / 1000) > todayUnixTime - 259200) {
+                wateringsForAverage.push(waterEvent)
+            }
+        })
+        return wateringsForAverage
+    }
+
+    const averageNumberOfWaterings = () => {
+        let runningTotal = 0
+        getLastThreeDaysOfWaterings().map((watering) => {
+            runningTotal += 1
+        })
+        return runningTotal / 3
+    }
+
     return (
         <ClickableDiv>
             <PlantDiv>
                 <h3>{plant.name}</h3>
                 <p><i>{plant.species}</i></p>
                 <p>Planted on: {plant.dateAdded}</p>
+                <p>Average water use: {averageNumberOfWaterings()}</p>
                 <OptionsDiv>
                     <ShowWaterDiv onClick={handleWaterClick}>
                         <p>{plant.waterEvents.length} waterings</p>

@@ -65,7 +65,7 @@ class Bed:
 
 ##### find a better way to do this bit  
     def json_poster_broccoli(self, time_to_run_pump):
-        r = requests.post('http://192.168.1.243:8080/waterEvents', json={
+        r = requests.post('http://192.168.1.120:8080/waterEvents', json={
             "eventDateTime": self.java_time_now(),
             "duration": time_to_run_pump,
             "success": True,
@@ -76,7 +76,7 @@ class Bed:
                 "tag": None,
                 "produces": "broccoli shoots",
                 "units": "GRAMS",
-                "dateAdded": "2022/08/23",
+                "dateAdded": "2022-08-23",
                 "dateRemoved": None,
                 "waterSensorEvents": [],
                 "bed": {
@@ -93,7 +93,7 @@ class Bed:
         print(f"Status Code: {r.status_code}, Response: {r.json()}")
     
     def json_poster_radish(self, time_to_run_pump):
-        r = requests.post('http://192.168.1.243:8080/waterEvents', json={
+        r = requests.post('http://192.168.1.120:8080/waterEvents', json={
             "eventDateTime": self.java_time_now(),
             "duration": time_to_run_pump,
             "success": True,
@@ -104,7 +104,7 @@ class Bed:
                 "tag": None,
                 "produces": "Raddish shoots",
                 "units": "GRAMS",
-                "dateAdded": "2022/08/23",
+                "dateAdded": "2022-08-23",
                 "dateRemoved": None,
                 "waterSensorEvents": [],
                 "bed": {
@@ -121,7 +121,7 @@ class Bed:
         print(f"Status Code: {r.status_code}, Response: {r.json()}")
 
     def json_poster_red_cabbage(self, time_to_run_pump):
-        r = requests.post('http://192.168.1.243:8080/waterEvents', json={
+        r = requests.post('http://192.168.1.120:8080/waterEvents', json={
             "eventDateTime": self.java_time_now(),
             "duration": time_to_run_pump,
             "success": True,
@@ -132,7 +132,7 @@ class Bed:
                 "tag": None,
                 "produces": "red cabbage shoots",
                 "units": "GRAMS",
-                "dateAdded": "2022/08/23",
+                "dateAdded": "2022-08-23",
                 "dateRemoved": None,
                 "waterSensorEvents": [],
                 "bed": {
@@ -149,7 +149,7 @@ class Bed:
         print(f"Status Code: {r.status_code}, Response: {r.json()}")
 
     def json_poster_brussel_sprouts(self, time_to_run_pump):
-        r = requests.post('http://192.168.1.243:8080/waterEvents', json={
+        r = requests.post('http://192.168.1.120:8080/waterEvents', json={
             "eventDateTime": self.java_time_now(),
             "duration": time_to_run_pump,
             "success": True,
@@ -160,7 +160,7 @@ class Bed:
                 "tag": None,
                 "produces": "brussel sprout shoots",
                 "units": "GRAMS",
-                "dateAdded": "2022/08/23",
+                "dateAdded": "2022-08-23",
                 "dateRemoved": None,
                 "waterSensorEvents": [],
                 "bed": {

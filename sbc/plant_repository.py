@@ -20,6 +20,7 @@ class Plant:
     
     def get_sensor_reading(self):
         if GPIO.input(self.bcm_sensor_channel):
+            # return False # your plant is dry
             return False # your plant is dry
         else:
             return True # your plant is wet

@@ -30,15 +30,15 @@ public class DataLoader implements ApplicationRunner {
         gardenRepository.save(garden1);
         Garden garden2 = new Garden("Smart Garden");
         gardenRepository.save(garden2);
-        Bed bed00 = new Bed("Rose Bed", 1000, garden0);
+        Bed bed00 = new Bed("Rose Bed", 0, garden0);
         bedRepository.save(bed00);
-        Bed bed01 = new Bed("Pumpkin Patch", 1000, garden0);
+        Bed bed01 = new Bed("Pumpkin Patch", 0, garden0);
         bedRepository.save(bed01);
-        Bed bed10 = new Bed("Vegetable Patch", 1000, garden1);
+        Bed bed10 = new Bed("Vegetable Patch", 0, garden1);
         bedRepository.save(bed10);
-        Bed bed11 = new Bed("Spuds", 1000, garden1);
+        Bed bed11 = new Bed("Spuds", 0, garden1);
         bedRepository.save(bed11);
-        Bed bed20 = new Bed("Seedlings", 1000, garden2);
+        Bed bed20 = new Bed("Seedlings", 0, garden2);
         bedRepository.save(bed20);
         Bed bed21 = new Bed("Salads", 1000, garden2);
         bedRepository.save(bed21);
@@ -158,7 +158,7 @@ public class DataLoader implements ApplicationRunner {
 
         WaterEvent waterEvent39 = new WaterEvent("2020-8-26 02:30:00", 5, true, plant10);
         waterEventRepository.save(waterEvent39);
-        
+
         Harvest harvest01 = new Harvest("2022-8-25", 5, plant07);
         harvestRepository.save(harvest01);
 

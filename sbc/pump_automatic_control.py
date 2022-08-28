@@ -5,7 +5,7 @@ import RPi.GPIO as GPIO
 GPIO.setmode(GPIO.BCM)
 bed = Bed(18)
 bed.setup()
-plant_1 = Plant(22, 2, "Broccoli")
+plant_1 = Plant(22, 7, "Broccoli")
 plant_1.setup()
 plant_2 = Plant(23, 4, "Radish")
 plant_2.setup()
