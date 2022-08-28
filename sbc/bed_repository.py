@@ -100,7 +100,9 @@ class Bed:
                             if self.check_reservoir() == True:
                                 print('got some water now')
                                 wait_for_water_loop = False
+                                ### add another error message here ###
                                 GPIO.output(self.bcm_relay_channel, GPIO.HIGH)
+        time.sleep(loop_length)
                                 
 
     def java_time_now(self):
@@ -108,6 +110,7 @@ class Bed:
             now = datetime.now()
             current_time = now.strftime("%H:%M:%S")
             return(f'{today}T{current_time}')
+    
 
 ##### find a better way to do this bit  
     def json_poster_broccoli(self, time_to_run_pump):
