@@ -20,7 +20,7 @@ bed.add_plant(plant_4)
 
 try:
     while True:
-        bed.water_plants_automatically(1, 1)
+        bed.water_plants_automatically_v2(1, 1)
                 
 except KeyboardInterrupt:
     bed.cleanup()

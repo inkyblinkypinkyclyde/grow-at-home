@@ -8,7 +8,6 @@ class Bed:
         self.bcm_reservoir_channel = bcm_reservoir_channel
         self.bcm_relay_channel = bcm_relay_channel
         self.plants = []
-        self.watering_queue = []
 
     def add_plant(self, plant):
         self.plants.append(plant)
@@ -23,13 +22,16 @@ class Bed:
         output = False
         GPIO.output(self.bcm_relay_channel, GPIO.LOW)
         time.sleep(.1)
-        if GPIO.input(self.bcm_reservoir_channel):
-            output = False # There is not water
-        else:
-            output = True # There is water
+        output = self.check_reservoir()
         time.sleep(.1)
         GPIO.output(self.bcm_relay_channel, GPIO.HIGH)
         return output
+    
+    def check_reservoir(self):
+        if GPIO.input(self.bcm_reservoir_channel):
+            return False # There is not water
+        else:
+            return True # There is water
 
     def water_plant_manually(self, plant_number):
         if self.get_reservoir_level():
@@ -66,6 +68,41 @@ class Bed:
             print('Uh-oh, looks like you are all out of water, waiting for a refill')
         time.sleep(loop_length)
     
+    def water_plants_automatically_v2(self, time_to_run_pump, loop_length):
+        for plant in self.plants:
+                if plant.get_sensor_reading():
+                    print(f'The {plant.name} seems fine, let\'s check the next one')
+                else:
+                    print(f'looks like the {plant.name} is a little dry, let\'s check if we have water...')
+                    if self.get_reservoir_level():
+                        print(f'Looks like we have water, lets water the {plant.name}')
+                        ###find a better way to do this bit
+                        if plant.name == "Broccoli":
+                            self.json_poster_broccoli(time_to_run_pump)
+                            plant.run_pump_for_given_time(time_to_run_pump)
+                        if plant.name == "Radish":
+                            self.json_poster_radish(time_to_run_pump)
+                            plant.run_pump_for_given_time(time_to_run_pump)
+                        if plant.name == "Red cabbage":
+                            self.json_poster_red_cabbage(time_to_run_pump)
+                            plant.run_pump_for_given_time(time_to_run_pump)
+                        if plant.name == "Brussel Sprouts":
+                            self.json_poster_brussel_sprouts(time_to_run_pump)
+                            plant.run_pump_for_given_time(time_to_run_pump)
+                    else:
+                        print(f'Oh No! there\'s no water to water the {plant.name} with!!!!')
+                        ### add an error message here ###
+                        wait_for_water_loop = True
+                        while wait_for_water_loop == True:
+                            GPIO.output(self.bcm_relay_channel, GPIO.LOW)
+                            print('waiting for water...')
+                            print(self.check_reservoir())
+                            if self.check_reservoir() == True:
+                                print('got some water now')
+                                wait_for_water_loop = False
+                                GPIO.output(self.bcm_relay_channel, GPIO.HIGH)
+                                
+
     def java_time_now(self):
             today = date.today()
             now = datetime.now()
