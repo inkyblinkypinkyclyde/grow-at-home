@@ -4,8 +4,9 @@ import RPi.GPIO as GPIO
 import time
 import requests
 class Bed:
-    def __init__(self, bcm_reservoir_channel):
+    def __init__(self, bcm_reservoir_channel, bcm_relay_channel):
         self.bcm_reservoir_channel = bcm_reservoir_channel
+        self.bcm_relay_channel = bcm_relay_channel
         self.plants = []
         self.watering_queue = []
 
@@ -14,13 +15,21 @@ class Bed:
     
     def setup(self):
         GPIO.setmode(GPIO.BCM)
+        GPIO.setup(self.bcm_relay_channel, GPIO.OUT)
+        GPIO.output(self.bcm_relay_channel, GPIO.HIGH)
         GPIO.setup(self.bcm_reservoir_channel, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
     
     def get_reservoir_level(self):
+        output = False
+        GPIO.output(self.bcm_relay_channel, GPIO.LOW)
+        time.sleep(.1)
         if GPIO.input(self.bcm_reservoir_channel):
-            return False # There is not water
+            output = False # There is not water
         else:
-            return True # There is water
+            output = True # There is water
+        time.sleep(.1)
+        GPIO.output(self.bcm_relay_channel, GPIO.HIGH)
+        return output
 
     def water_plant_manually(self, plant_number):
         if self.get_reservoir_level():

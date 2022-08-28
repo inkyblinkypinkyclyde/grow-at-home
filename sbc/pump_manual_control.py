@@ -3,7 +3,7 @@ from bed_repository import Bed
 import RPi.GPIO as GPIO
 
 GPIO.setmode(GPIO.BCM)
-bed = Bed(18)
+bed = Bed(18, 2)
 bed.setup()
 plant_1 = Plant(22, 7, "Broccoli")
 plant_1.setup()
