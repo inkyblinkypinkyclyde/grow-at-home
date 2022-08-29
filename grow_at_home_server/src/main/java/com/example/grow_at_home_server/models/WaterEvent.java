@@ -10,6 +10,8 @@ public class WaterEvent {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @Transient
+    private Long plantId;
     @Column(name = "datetime")
     private LocalDateTime eventDateTime;
     @Column(name = "duration")
@@ -21,11 +23,12 @@ public class WaterEvent {
     @JoinColumn(name = "plant_id", nullable = false)
     private Plant plant;
 
-    public WaterEvent(String eventDateTime, int duration, boolean success, Plant plant) {
+    public WaterEvent(String eventDateTime, int duration, boolean success, Plant plant, Long plantId) {
         this.eventDateTime = this.formatDateAndTime(eventDateTime);
         this.duration = duration;
         this.success = success;
         this.plant = plant;
+        this.plantId = plantId;
     }
 
     private LocalDateTime formatDateAndTime(String givenDateTime) {
@@ -41,6 +44,14 @@ public class WaterEvent {
     }
 
     public WaterEvent() {
+    }
+
+    public Long getPlantId() {
+        return plantId;
+    }
+
+    public void setPlantId(Long plantId) {
+        this.plantId = plantId;
     }
 
     public Long getId() {

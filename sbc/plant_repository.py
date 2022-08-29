@@ -2,9 +2,10 @@ import RPi.GPIO as GPIO
 import time
 
 class Plant:
-    def __init__(self, bcm_pump_channel, bcm_sensor_channel, name):
+    def __init__(self, bcm_pump_channel, bcm_sensor_channel, db_id, name):
         self.bcm_pump_channel = bcm_pump_channel
         self.bcm_sensor_channel = bcm_sensor_channel
+        self.db_id = db_id
         self.name = name
         
     def setup(self):

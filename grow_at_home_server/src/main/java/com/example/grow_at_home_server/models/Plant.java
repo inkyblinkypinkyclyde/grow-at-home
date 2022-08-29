@@ -50,7 +50,6 @@ public class Plant {
         this.units = units;
         this.dateAdded = this.formatDate(dateAdded);
         this.dateRemoved = null;
-//        this.waterSensorEvents = new ArrayList<>();
         this.waterEvents = new ArrayList<>();
         this.bed = bed;
     }

@@ -10,6 +10,11 @@ padding: 0.25rem;
 `
 
 const WaterEvent = ({ waterEvent }) => {
+
+    const dateWatered = Math.floor(new Date(waterEvent.eventDateTime).getTime() / 1000)
+    if (dateWatered === 1661542200) {
+        console.log('here')
+    }
     return (
         <ClickableDiv>
             <WaterDiv>
