@@ -78,17 +78,25 @@ class Bed:
                         print(f'Looks like we have water, lets water the {plant.name}')
                         ###find a better way to do this bit
                         if plant.name == "Broccoli":
-                            self.json_poster_broccoli(time_to_run_pump)
-                            plant.run_pump_for_given_time(time_to_run_pump)
+                            try:
+                                self.json_poster_broccoli(time_to_run_pump)
+                            finally:
+                                plant.run_pump_for_given_time(time_to_run_pump)
                         if plant.name == "Radish":
-                            self.json_poster_radish(time_to_run_pump)
-                            plant.run_pump_for_given_time(time_to_run_pump)
+                            try:
+                                self.json_poster_radish(time_to_run_pump)
+                            finally:
+                                plant.run_pump_for_given_time(time_to_run_pump)
                         if plant.name == "Red cabbage":
-                            self.json_poster_red_cabbage(time_to_run_pump)
-                            plant.run_pump_for_given_time(time_to_run_pump)
+                            try:
+                                self.json_poster_red_cabbage(time_to_run_pump)
+                            finally:
+                                plant.run_pump_for_given_time(time_to_run_pump)
                         if plant.name == "Brussel Sprouts":
-                            self.json_poster_brussel_sprouts(time_to_run_pump)
-                            plant.run_pump_for_given_time(time_to_run_pump)
+                            try:
+                                self.json_poster_brussel_sprouts(time_to_run_pump)
+                            finally:
+                                plant.run_pump_for_given_time(time_to_run_pump)
                     else:
                         print(f'Oh No! there\'s no water to water the {plant.name} with!!!!')
                         ### add an error message here ###
@@ -110,8 +118,16 @@ class Bed:
             now = datetime.now()
             current_time = now.strftime("%H:%M:%S")
             return(f'{today}T{current_time}')
-    
+    def empty_reservoir(self):
+        r = requests.post('http://192.168.1.120:8080/waterSensorReservoirEvents', json={
+            "eventDateTime": self.java_time_now(),
+            "wet": False,
+            "bed": "Salads"
+            })
+        print(f"Status Code: {r.status_code}, Response: {r.json()}")
 
+
+     
 ##### find a better way to do this bit  
     def json_poster_broccoli(self, time_to_run_pump):
         r = requests.post('http://192.168.1.120:8080/waterEvents', json={

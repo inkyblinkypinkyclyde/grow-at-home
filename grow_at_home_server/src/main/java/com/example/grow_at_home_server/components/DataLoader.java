@@ -162,6 +162,8 @@ public class DataLoader implements ApplicationRunner {
         Harvest harvest01 = new Harvest("2022-8-25", 5, plant07);
         harvestRepository.save(harvest01);
 
+        WaterSensorReservoirEvent waterSensorReservoirEvent01 = new WaterSensorReservoirEvent("2020-8-26 02:30:00", true,  bed21, 6L);
+        waterSensorReservoirEventRepository.save(waterSensorReservoirEvent01);
 
 
     }
