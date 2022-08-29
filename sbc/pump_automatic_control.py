@@ -5,13 +5,13 @@ import RPi.GPIO as GPIO
 GPIO.setmode(GPIO.BCM)
 bed = Bed(18, 2)
 bed.setup()
-plant_1 = Plant(22, 7, "Broccoli")
+plant_1 = Plant(22, 7, 7, "Broccoli")
 plant_1.setup()
-plant_2 = Plant(23, 4, "Radish")
+plant_2 = Plant(23, 4, 8, "Radish")
 plant_2.setup()
-plant_3 = Plant(24, 5, "Red cabbage")
+plant_3 = Plant(24, 5, 9, "Red cabbage")
 plant_3.setup()
-plant_4 = Plant(25, 6, "Brussel Sprouts")
+plant_4 = Plant(25, 6, 10, "Brussel Sprouts")
 plant_4.setup()
 bed.add_plant(plant_1)
 bed.add_plant(plant_2)
@@ -20,7 +20,7 @@ bed.add_plant(plant_4)
 
 try:
     while True:
-        bed.water_plants_automatically_v2(1, 1)
+        bed.water_plants_automatically(1, 1)
                 
 except KeyboardInterrupt:
     bed.cleanup()
