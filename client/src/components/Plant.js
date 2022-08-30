@@ -45,11 +45,13 @@ const Plant = ({ plant, onWaterClick, onHarvestClick }) => {
 
     const averageNumberOfWaterings = () => {
         let runningTotal = 0
-        getLastThreeDaysOfWaterings().map((watering) => {
+        getLastThreeDaysOfWaterings().forEach((watering) => {
+            console.log(watering)
             runningTotal += 1
         })
         return runningTotal / 3
     }
+
 
     return (
         <ClickableDiv>

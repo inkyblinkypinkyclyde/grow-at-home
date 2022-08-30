@@ -180,7 +180,7 @@ const AllGardens = () => {
     }
     return (
         <div>
-            <h1>All My Gardens</h1>
+
             <ScrollContainer>
                 <ColumnDiv>
                     {myGardens}
