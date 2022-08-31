@@ -34,6 +34,8 @@ public class Plant {
 
     @Column(name = "averageWaterInterval")
     private double averageWaterInterval;
+    @Column(name = "thirstyMultiplier")
+    private double thirstyMultiplier;
 
     @JsonIgnoreProperties({"plant"})
     @OneToMany(mappedBy = "plant", fetch = FetchType.LAZY, cascade = CascadeType.REMOVE, orphanRemoval = true)
@@ -55,21 +57,33 @@ public class Plant {
         this.waterEvents = new ArrayList<>();
         this.bed = bed;
         this.averageWaterInterval = 0;
+        this.thirstyMultiplier = 1;
     }
 
     public Plant() {
     }
 
+    public double getThirstyMultiplier() {
+        return thirstyMultiplier;
+    }
+
+    public void setThirstyMultiplier(double thirstyMultiplier) {
+        this.thirstyMultiplier = thirstyMultiplier;
+    }
+
     public void generateAverageWaterInterval(){
+        System.out.println("called method");
         if (this.waterEvents.size() > 5){
+            System.out.println("passed if statement");
             double total = 0;
-            for (int i = 0; i < 6; i++){
+            for (int i = 0; i < 3; i++){
                 long currentTimeDate = waterEvents.get(waterEvents.size()-(i+1)).getEventDateTime().toEpochSecond(ZoneOffset.UTC);
                 long previousTimeDate = waterEvents.get(waterEvents.size()-(i+2)).getEventDateTime().toEpochSecond(ZoneOffset.UTC);
                 total = total + (currentTimeDate - previousTimeDate);
             }
-            double average = total/5;
+            double average = total/3;
             setAverageWaterInterval(average);
+            System.out.println("set average");
         } else {
             setAverageWaterInterval(0);
         }
