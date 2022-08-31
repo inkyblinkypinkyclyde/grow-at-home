@@ -70,6 +70,18 @@ class Bed:
                                 time.sleep(1)
                                 wait_for_water_loop = False
         time.sleep(loop_length)
+    
+    # def water_plants_cleverly(self, time_to_run_pump):
+    #     loop_size = 0
+    #     for plant in self.plants:
+    #         if plant.averageWaterInterval > loop_size:
+    #             loop_size = (plant.averageWaterInterval)+1
+    #     for i in range(loop_size):
+    #         for plant in self.plants:
+    #             if plant.
+        
+
+
                                 
     def java_time_now(self):
             today = date.today()
@@ -82,9 +94,22 @@ class Bed:
         r = requests.post('http://192.168.1.120:8080/waterSensorReservoirEvents', json={
             "eventDateTime": self.java_time_now(),
             "wet": wet,
-            "bedId": 6
+            "bedId": 5
             })
         print(f"Status Code: {r.status_code}, Response: {r.json()}")
+
+
+    def plant_water_data_setter(self, plant):
+        r = requests.get(f'http://192.168.1.120:8080/plants/{plant.db_id}')
+        response = r.json()
+        print(response['id'])
+        print(response['name'])
+        print(response['averageWaterInterval'])
+        print(response['thirstyMultiplier'])
+        plant.thirstyMuliplier = response['thirstyMultiplier']
+        plant.averageWaterInterval = response['averageWaterInterval']
+        
+        
 
     def json_poster(self, time_to_run_pump, plantId):
         r = requests.post('http://192.168.1.120:8080/waterEvents', json={

@@ -7,6 +7,8 @@ class Plant:
         self.bcm_sensor_channel = bcm_sensor_channel
         self.db_id = db_id
         self.name = name
+        self.thirstyMultiplier = None
+        self.averageWaterInterval = None
         
     def setup(self):
         GPIO.setmode(GPIO.BCM)
@@ -24,3 +26,4 @@ class Plant:
             return False # your plant is dry
         else:
             return True # your plant is wet
+

@@ -53,7 +53,6 @@ const Bed = ({ bed, onBedClick }) => {
                 dataDict.event1.emptied = Math.round(new Date(bed.waterSensorReservoirEvents[bed.waterSensorReservoirEvents.length - 5].eventDateTime).getTime() / 1000)
                 dataDict.event1.filled = Math.round(new Date(bed.waterSensorReservoirEvents[bed.waterSensorReservoirEvents.length - 6].eventDateTime).getTime() / 1000)
             }
-            console.log(dataDict)
             const event1diff = dataDict.event1.emptied - dataDict.event1.filled
             const event2diff = dataDict.event2.emptied - dataDict.event2.filled
             const event3diff = dataDict.event3.emptied - dataDict.event3.filled
@@ -61,7 +60,7 @@ const Bed = ({ bed, onBedClick }) => {
             const days = Math.floor(averageseconds / 86400)
             const hours = Math.floor((averageseconds - (86400 * days)) / 3600)
             const minutes = Math.floor((averageseconds - (86400 * days) - (3600 * hours)) / 60)
-            const seconds = Math.floor((averageseconds - (86400 * days) - (3600 * hours) - (60 * minutes)) / 60)
+            const seconds = Math.floor((averageseconds - (86400 * days) - (3600 * hours) - (60 * minutes)))
             return `${days}D, ${hours}H, ${minutes}M, ${seconds}S`
         } else {
             return 'Not enough data yet'
@@ -69,8 +68,8 @@ const Bed = ({ bed, onBedClick }) => {
     }
 
     const smartBedData = () => {
-        const dateString = bed.waterSensorReservoirEvents.findLast((event) => event.wet === true)
 
+        const dateString = bed.waterSensorReservoirEvents.findLast((event) => event.wet === true)
         return (
             <table>
                 <tbody>

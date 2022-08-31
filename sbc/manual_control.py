@@ -1,5 +1,5 @@
-from plant_repository import Plant
-from bed_repository import Bed
+from plant import Plant
+from bed import Bed
 import RPi.GPIO as GPIO
 
 GPIO.setmode(GPIO.BCM)

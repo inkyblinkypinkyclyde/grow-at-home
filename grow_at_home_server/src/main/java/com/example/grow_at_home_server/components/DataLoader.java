@@ -38,7 +38,7 @@ public class DataLoader implements ApplicationRunner {
         bedRepository.save(bed10);
         Bed bed11 = new Bed("Spuds", 0, garden1);
         bedRepository.save(bed11);
-        Bed bed20 = new Bed("Seedlings", 0, garden2);
+        Bed bed20 = new Bed("Seedlings", 1000, garden2);
         bedRepository.save(bed20);
         Bed bed21 = new Bed("Salads", 1000, garden2);
         bedRepository.save(bed21);
@@ -54,6 +54,14 @@ public class DataLoader implements ApplicationRunner {
         plantRepository.save(plant05);
         Plant plant06 = new Plant("Corn", "Corninus of the Cobbibus", null, "corn", Units.CENTIMETERS, "2022-8-23", bed20);
         plantRepository.save(plant06);
+        Plant plant11 = new Plant("Red Onions", "Onnionus Onnunaricus", null, "onions", Units.INTEGERS, "2022-8-23", bed20);
+        plantRepository.save(plant11);
+        Plant plant12 = new Plant("Red Chillis", "Muchos Spicicus", null, "chillies", Units.INTEGERS, "2022-8-23", bed20);
+        plantRepository.save(plant12);
+        Plant plant13 = new Plant("Cauliflower", "Whitus Brocolus", null, "caulifower", Units.INTEGERS, "2022-8-23", bed20);
+        plantRepository.save(plant13);
+
+
         Plant plant07 = new Plant("Broccoli", "Broccolus Brocollilicus", null, "broccoli shoots", Units.GRAMS, "2022-8-23", bed21);
         Plant plant08 = new Plant("Radish", "Spicucus Redvegicus", null, "Raddish shoots", Units.GRAMS, "2022-8-23", bed21);
         Plant plant09 = new Plant("Red Cabbage", "Cabbagicum Cabaragicus", null, "red cabbage shoots", Units.GRAMS, "2022-8-23", bed21);
@@ -229,6 +237,12 @@ public class DataLoader implements ApplicationRunner {
         waterSensorReservoirEventRepository.save(waterSensorReservoirEvent06);
         WaterSensorReservoirEvent waterSensorReservoirEvent07 = new WaterSensorReservoirEvent("2020-8-26 02:01:00", true,  bed21, 6L);
         waterSensorReservoirEventRepository.save(waterSensorReservoirEvent07);
+
+        WaterSensorReservoirEvent waterSensorReservoirEvent08 = new WaterSensorReservoirEvent("2020-8-26 02:01:00", true,  bed20, 5L);
+        waterSensorReservoirEventRepository.save(waterSensorReservoirEvent08);
+
+
+
 
 
     }
