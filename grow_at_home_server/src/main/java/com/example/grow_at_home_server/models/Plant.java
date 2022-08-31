@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.time.ZoneOffset;
 import java.util.ArrayList;
 import java.util.List;
 @Entity
@@ -30,9 +31,10 @@ public class Plant {
     private LocalDate dateAdded;
     @Column(name ="dateRemoved")
     private LocalDate dateRemoved;
-//    @JsonIgnoreProperties({"plant"})
-//    @OneToMany(mappedBy = "plant", fetch = FetchType.LAZY, cascade = CascadeType.REMOVE, orphanRemoval = true)
-//    private List<WaterSensorEvent> waterSensorEvents;
+
+    @Column(name = "averageWaterInterval")
+    private double averageWaterInterval;
+
     @JsonIgnoreProperties({"plant"})
     @OneToMany(mappedBy = "plant", fetch = FetchType.LAZY, cascade = CascadeType.REMOVE, orphanRemoval = true)
     private List<WaterEvent> waterEvents;
@@ -52,13 +54,36 @@ public class Plant {
         this.dateRemoved = null;
         this.waterEvents = new ArrayList<>();
         this.bed = bed;
+        this.averageWaterInterval = 0;
     }
 
     public Plant() {
     }
 
+    public void generateAverageWaterInterval(){
+        if (this.waterEvents.size() > 5){
+            double total = 0;
+            for (int i = 0; i < 6; i++){
+                long currentTimeDate = waterEvents.get(waterEvents.size()-(i+1)).getEventDateTime().toEpochSecond(ZoneOffset.UTC);
+                long previousTimeDate = waterEvents.get(waterEvents.size()-(i+2)).getEventDateTime().toEpochSecond(ZoneOffset.UTC);
+                total = total + (currentTimeDate - previousTimeDate);
+            }
+            double average = total/5;
+            setAverageWaterInterval(average);
+        } else {
+            setAverageWaterInterval(0);
+        }
+    }
+
+    public double getAverageWaterInterval() {
+        return averageWaterInterval;
+    }
+
+    public void setAverageWaterInterval(double averageWaterInterval) {
+        this.averageWaterInterval = averageWaterInterval;
+    }
+
     public LocalDate formatDate(String givenDate) {
-        System.out.println(givenDate);
         if (givenDate == null){
             return null;
         }
@@ -146,18 +171,6 @@ public class Plant {
     public void setDateRemoved(String dateRemoved) {
         this.dateRemoved = this.formatDate(dateRemoved);
     }
-
-//    public List<WaterSensorEvent> getWaterSensorEvents() {
-//        return waterSensorEvents;
-//    }
-
-//    public void setWaterSensorEvents(List<WaterSensorEvent> waterSensorEvents) {
-//        this.waterSensorEvents = waterSensorEvents;
-//    }
-
-//    public void addWaterSensorEvent(WaterSensorEvent waterSensorEvent){
-//        this.waterSensorEvents.add(waterSensorEvent);
-//    }
 
     public List<WaterEvent> getWaterEvents() {
         return waterEvents;

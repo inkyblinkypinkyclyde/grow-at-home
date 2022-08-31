@@ -34,6 +34,8 @@ public class WaterEventController {
     public ResponseEntity<WaterEvent> postFile(@RequestBody WaterEvent waterEvent){
         Optional<Plant> plant = plantRepository.findById(waterEvent.getPlantId());
         waterEvent.setPlant(plant.get());
+        plant.get().generateAverageWaterInterval();
+        plantRepository.save(plant.get());
         waterEventRepository.save(waterEvent);
         return new ResponseEntity<>(waterEvent, HttpStatus.OK);
     }
