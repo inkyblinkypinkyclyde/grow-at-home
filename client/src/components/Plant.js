@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components"
 
+
 const ClickableDiv = styled.div`
 background-color: aquamarine;
 `
@@ -32,25 +33,19 @@ const Plant = ({ plant, onWaterClick, onHarvestClick }) => {
         onHarvestClick(plant)
     }
 
-    const getLastThreeDaysOfWaterings = () => {
-        let wateringsForAverage = []
-        const todayUnixTime = Math.floor(new Date('2022-08-26').getTime() / 1000)
-        plant.waterEvents.map((waterEvent) => {
-            if (Math.floor(new Date(waterEvent.eventDateTime).getTime() / 1000) > todayUnixTime - 259200) {
-                wateringsForAverage.push(waterEvent)
-            }
-        })
-        return wateringsForAverage
+    const averageWaterInterval = () => {
+        const averageseconds = plant.averageWaterInterval
+        const days = Math.floor(averageseconds / 86400)
+        const hours = Math.floor((averageseconds - (86400 * days)) / 3600)
+        const minutes = Math.floor((averageseconds - (86400 * days) - (3600 * hours)) / 60)
+        const seconds = Math.floor((averageseconds - (86400 * days) - (3600 * hours) - (60 * minutes)) / 60)
+        if (averageseconds > 0) {
+            return `${days}D, ${hours}H, ${minutes}M, ${seconds}S`
+        } else {
+            return 'Not enough data'
+        }
     }
 
-    const averageNumberOfWaterings = () => {
-        let runningTotal = 0
-        getLastThreeDaysOfWaterings().forEach((watering) => {
-            console.log(watering)
-            runningTotal += 1
-        })
-        return runningTotal / 3
-    }
 
 
     return (
@@ -58,8 +53,8 @@ const Plant = ({ plant, onWaterClick, onHarvestClick }) => {
             <PlantDiv>
                 <h3>{plant.name}</h3>
                 <p><i>{plant.species}</i></p>
-                <p>Planted on: {plant.dateAdded}</p>
-                <p>Average water use: {averageNumberOfWaterings()}</p>
+                <p>Planted on: {new Date(plant.dateAdded).toDateString()}</p>
+                <p>Average water use: {averageWaterInterval()}</p>
                 <OptionsDiv>
                     <ShowWaterDiv onClick={handleWaterClick}>
                         <p>{plant.waterEvents.length} waterings</p>

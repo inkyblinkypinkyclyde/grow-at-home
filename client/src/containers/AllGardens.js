@@ -180,7 +180,6 @@ const AllGardens = () => {
     }
     return (
         <div>
-
             <ScrollContainer>
                 <ColumnDiv>
                     {myGardens}

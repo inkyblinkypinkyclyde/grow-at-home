@@ -55,108 +55,158 @@ public class DataLoader implements ApplicationRunner {
         Plant plant06 = new Plant("Corn", "Corninus of the Cobbibus", null, "corn", Units.CENTIMETERS, "2022-8-23", bed20);
         plantRepository.save(plant06);
         Plant plant07 = new Plant("Broccoli", "Broccolus Brocollilicus", null, "broccoli shoots", Units.GRAMS, "2022-8-23", bed21);
-        plantRepository.save(plant07);
         Plant plant08 = new Plant("Radish", "Spicucus Redvegicus", null, "Raddish shoots", Units.GRAMS, "2022-8-23", bed21);
-        plantRepository.save(plant08);
         Plant plant09 = new Plant("Red Cabbage", "Cabbagicum Cabaragicus", null, "red cabbage shoots", Units.GRAMS, "2022-8-23", bed21);
-        plantRepository.save(plant09);
         Plant plant10 = new Plant("Brussel Sprouts", "Brusselus Tasteslikefarticus", null, "brussel sprout shoots", Units.GRAMS, "2022-8-23", bed21);
-        plantRepository.save(plant10);
 
-        WaterEvent waterEvent00 = new WaterEvent("2020-8-23 02:30:00", 5, true, plant07, 7L);
-        waterEventRepository.save(waterEvent00);
+        WaterEvent waterEvent00 = new WaterEvent("2022-8-23 02:30:00", 5, true, plant07, 7L);
+        plant07.addWaterEvent(waterEvent00);
+
         WaterEvent waterEvent01 = new WaterEvent("2022-8-23 08:00:00", 5, true, plant07, 7L);
-        waterEventRepository.save(waterEvent01);
+        plant07.addWaterEvent(waterEvent01);
         WaterEvent waterEvent02 = new WaterEvent("2022-8-23 14:00:00", 5, true, plant07, 7L);
-        waterEventRepository.save(waterEvent02);
+        plant07.addWaterEvent(waterEvent02);
         WaterEvent waterEvent03 = new WaterEvent("2022-8-23 20:30:00", 5, true, plant07, 7L);
-        waterEventRepository.save(waterEvent03);
+        plant07.addWaterEvent(waterEvent03);
 
-        WaterEvent waterEvent04 = new WaterEvent("2020-8-24 02:30:00", 5, true, plant07, 7L);
-        waterEventRepository.save(waterEvent04);
+        WaterEvent waterEvent04 = new WaterEvent("2022-8-24 02:30:00", 5, true, plant07, 7L);
+        plant07.addWaterEvent(waterEvent04);
         WaterEvent waterEvent05 = new WaterEvent("2022-8-24 08:00:00", 5, true, plant07, 7L);
-        waterEventRepository.save(waterEvent05);
+        plant07.addWaterEvent(waterEvent05);
         WaterEvent waterEvent06 = new WaterEvent("2022-8-24 14:00:00", 5, true, plant07, 7L);
-        waterEventRepository.save(waterEvent06);
+        plant07.addWaterEvent(waterEvent06);
         WaterEvent waterEvent07 = new WaterEvent("2022-8-24 20:30:00", 5, true, plant07, 7L);
-        waterEventRepository.save(waterEvent07);
+        plant07.addWaterEvent(waterEvent07);
 
-        WaterEvent waterEvent08 = new WaterEvent("2020-8-25 02:30:00", 5, true, plant07, 7L);
-        waterEventRepository.save(waterEvent08);
+        WaterEvent waterEvent08 = new WaterEvent("2022-8-25 02:30:00", 5, true, plant07, 7L);
+        plant07.addWaterEvent(waterEvent08);
         WaterEvent waterEvent09 = new WaterEvent("2022-8-25 08:00:00", 5, true, plant07, 7L);
-        waterEventRepository.save(waterEvent09);
+        plant07.addWaterEvent(waterEvent09);
         WaterEvent waterEvent10 = new WaterEvent("2022-8-25 14:00:00", 5, true, plant07, 7L);
-        waterEventRepository.save(waterEvent10);
+        plant07.addWaterEvent(waterEvent10);
         WaterEvent waterEvent11 = new WaterEvent("2022-8-25 20:30:00", 5, true, plant07, 7L);
-        waterEventRepository.save(waterEvent11);
+        plant07.addWaterEvent(waterEvent11);
 
-        WaterEvent waterEvent12 = new WaterEvent("2020-8-26 02:30:00", 5, true, plant07, 7L);
-        waterEventRepository.save(waterEvent12);
+        WaterEvent waterEvent12 = new WaterEvent("2022-8-26 02:30:00", 5, true, plant07, 7L);
+        plant07.addWaterEvent(waterEvent12);
         WaterEvent waterEvent13 = new WaterEvent("2022-8-26 08:00:00", 5, true, plant07, 7L);
-        waterEventRepository.save(waterEvent13);
+        plant07.addWaterEvent(waterEvent13);
         WaterEvent waterEvent14 = new WaterEvent("2022-8-26 14:00:00", 5, true, plant07, 7L);
-        waterEventRepository.save(waterEvent14);
+        plant07.addWaterEvent(waterEvent14);
         WaterEvent waterEvent15 = new WaterEvent("2022-8-26 20:30:00", 5, true, plant07, 7L);
+        plant07.addWaterEvent(waterEvent15);
+        plant07.generateAverageWaterInterval();
+        plantRepository.save(plant07);
+        waterEventRepository.save(waterEvent00);
+        waterEventRepository.save(waterEvent01);
+        waterEventRepository.save(waterEvent02);
+        waterEventRepository.save(waterEvent03);
+        waterEventRepository.save(waterEvent04);
+        waterEventRepository.save(waterEvent05);
+        waterEventRepository.save(waterEvent06);
+        waterEventRepository.save(waterEvent07);
+        waterEventRepository.save(waterEvent08);
+        waterEventRepository.save(waterEvent09);
+        waterEventRepository.save(waterEvent10);
+        waterEventRepository.save(waterEvent11);
+        waterEventRepository.save(waterEvent12);
+        waterEventRepository.save(waterEvent13);
+        waterEventRepository.save(waterEvent14);
         waterEventRepository.save(waterEvent15);
 
-        WaterEvent waterEvent16 = new WaterEvent("2020-8-23 02:30:00", 5, true, plant08, 8L);
+        WaterEvent waterEvent16 = new WaterEvent("2022-8-23 02:30:00", 5, true, plant08, 8L);
+        plant08.addWaterEvent(waterEvent16);
+        WaterEvent waterEvent17 = new WaterEvent("2022-8-23 10:30:00", 5, true, plant08, 8L);
+        plant08.addWaterEvent(waterEvent17);
+        WaterEvent waterEvent18 = new WaterEvent("2022-8-23 18:30:00", 5, true, plant08, 8L);
+        plant08.addWaterEvent(waterEvent18);
+
+        WaterEvent waterEvent19 = new WaterEvent("2022-8-24 02:30:00", 5, true, plant08, 8L);
+        plant08.addWaterEvent(waterEvent19);
+        WaterEvent waterEvent20 = new WaterEvent("2022-8-24 10:30:00", 5, true, plant08, 8L);
+        plant08.addWaterEvent(waterEvent20);
+        WaterEvent waterEvent21 = new WaterEvent("2022-8-24 18:30:00", 5, true, plant08, 8L);
+        plant08.addWaterEvent(waterEvent21);
+
+        WaterEvent waterEvent22 = new WaterEvent("2022-8-25 02:30:00", 5, true, plant08, 8L);
+        plant08.addWaterEvent(waterEvent22);
+        WaterEvent waterEvent23 = new WaterEvent("2022-8-25 10:30:00", 5, true, plant08, 8L);
+        plant08.addWaterEvent(waterEvent23);
+        WaterEvent waterEvent24 = new WaterEvent("2022-8-25 18:30:00", 5, true, plant08, 8L);
+        plant08.addWaterEvent(waterEvent24);
+
+        WaterEvent waterEvent25 = new WaterEvent("2022-8-26 02:30:00", 5, true, plant08, 8L);
+        plant08.addWaterEvent(waterEvent25);
+        WaterEvent waterEvent26 = new WaterEvent("2022-8-26 10:30:00", 5, true, plant08, 8L);
+        plant08.addWaterEvent(waterEvent26);
+        WaterEvent waterEvent27 = new WaterEvent("2022-8-26 18:30:00", 5, true, plant08, 8L);
+        plant08.addWaterEvent(waterEvent27);
+        plant08.generateAverageWaterInterval();
+        plantRepository.save(plant08);
         waterEventRepository.save(waterEvent16);
-        WaterEvent waterEvent17 = new WaterEvent("2020-8-23 10:30:00", 5, true, plant08, 8L);
         waterEventRepository.save(waterEvent17);
-        WaterEvent waterEvent18 = new WaterEvent("2020-8-23 18:30:00", 5, true, plant08, 8L);
         waterEventRepository.save(waterEvent18);
-
-        WaterEvent waterEvent19 = new WaterEvent("2020-8-24 02:30:00", 5, true, plant08, 8L);
         waterEventRepository.save(waterEvent19);
-        WaterEvent waterEvent20 = new WaterEvent("2020-8-24 10:30:00", 5, true, plant08, 8L);
         waterEventRepository.save(waterEvent20);
-        WaterEvent waterEvent21 = new WaterEvent("2020-8-24 18:30:00", 5, true, plant08, 8L);
         waterEventRepository.save(waterEvent21);
-
-        WaterEvent waterEvent22 = new WaterEvent("2020-8-25 02:30:00", 5, true, plant08, 8L);
         waterEventRepository.save(waterEvent22);
-        WaterEvent waterEvent23 = new WaterEvent("2020-8-25 10:30:00", 5, true, plant08, 8L);
         waterEventRepository.save(waterEvent23);
-        WaterEvent waterEvent24 = new WaterEvent("2020-8-25 18:30:00", 5, true, plant08, 8L);
         waterEventRepository.save(waterEvent24);
-
-        WaterEvent waterEvent25 = new WaterEvent("2020-8-26 02:30:00", 5, true, plant08, 8L);
         waterEventRepository.save(waterEvent25);
-        WaterEvent waterEvent26 = new WaterEvent("2020-8-26 10:30:00", 5, true, plant08, 8L);
         waterEventRepository.save(waterEvent26);
-        WaterEvent waterEvent27 = new WaterEvent("2020-8-26 18:30:00", 5, true, plant08, 8L);
         waterEventRepository.save(waterEvent27);
 
-        WaterEvent waterEvent28 = new WaterEvent("2020-8-23 02:30:00", 5, true, plant09, 9L);
+
+
+
+        WaterEvent waterEvent28 = new WaterEvent("2022-8-23 02:30:00", 5, true, plant09, 9L);
+        plant09.addWaterEvent(waterEvent28);
+        WaterEvent waterEvent29 = new WaterEvent("2022-8-23 12:30:00", 5, true, plant09, 9L);
+        plant09.addWaterEvent(waterEvent29);
+
+        WaterEvent waterEvent30 = new WaterEvent("2022-8-24 02:30:00", 5, true, plant09, 9L);
+        plant09.addWaterEvent(waterEvent30);
+        WaterEvent waterEvent31 = new WaterEvent("2022-8-24 12:30:00", 5, true, plant09, 9L);
+        plant09.addWaterEvent(waterEvent31);
+
+        WaterEvent waterEvent32 = new WaterEvent("2022-8-25 02:30:00", 5, true, plant09, 9L);
+        plant09.addWaterEvent(waterEvent32);
+        WaterEvent waterEvent33 = new WaterEvent("2022-8-25 12:30:00", 5, true, plant09, 9L);
+        plant09.addWaterEvent(waterEvent33);
+
+        WaterEvent waterEvent34 = new WaterEvent("2022-8-26 02:30:00", 5, true, plant09, 9L);
+        plant09.addWaterEvent(waterEvent34);
+        WaterEvent waterEvent35 = new WaterEvent("2022-8-26 12:30:00", 5, true, plant09, 9L);
+        plant09.addWaterEvent(waterEvent35);
+        plant09.generateAverageWaterInterval();
+        plantRepository.save(plant09);
         waterEventRepository.save(waterEvent28);
-        WaterEvent waterEvent29 = new WaterEvent("2020-8-23 12:30:00", 5, true, plant09, 9L);
         waterEventRepository.save(waterEvent29);
-
-        WaterEvent waterEvent30 = new WaterEvent("2020-8-24 02:30:00", 5, true, plant09, 9L);
         waterEventRepository.save(waterEvent30);
-        WaterEvent waterEvent31 = new WaterEvent("2020-8-24 12:30:00", 5, true, plant09, 9L);
         waterEventRepository.save(waterEvent31);
-
-        WaterEvent waterEvent32 = new WaterEvent("2020-8-25 02:30:00", 5, true, plant09, 9L);
         waterEventRepository.save(waterEvent32);
-        WaterEvent waterEvent33 = new WaterEvent("2020-8-25 12:30:00", 5, true, plant09, 9L);
         waterEventRepository.save(waterEvent33);
-
-        WaterEvent waterEvent34 = new WaterEvent("2020-8-26 02:30:00", 5, true, plant09, 9L);
         waterEventRepository.save(waterEvent34);
-        WaterEvent waterEvent35 = new WaterEvent("2020-8-26 12:30:00", 5, true, plant09, 9L);
         waterEventRepository.save(waterEvent35);
 
-        WaterEvent waterEvent36 = new WaterEvent("2020-8-23 02:30:00", 5, true, plant10, 10L);
+
+
+        WaterEvent waterEvent36 = new WaterEvent("2022-8-23 02:30:00", 5, true, plant10, 10L);
+        plant10.addWaterEvent(waterEvent36);
+
+        WaterEvent waterEvent37 = new WaterEvent("2022-8-24 02:30:00", 5, true, plant10, 10L);
+        plant10.addWaterEvent(waterEvent37);
+
+        WaterEvent waterEvent38 = new WaterEvent("2022-8-25 02:30:00", 5, true, plant10, 10L);
+        plant10.addWaterEvent(waterEvent38);
+
+        WaterEvent waterEvent39 = new WaterEvent("2022-8-26 02:30:00", 5, true, plant10, 10L);
+        plant10.addWaterEvent(waterEvent39);
+        plant10.generateAverageWaterInterval();
+        plantRepository.save(plant10);
         waterEventRepository.save(waterEvent36);
-
-        WaterEvent waterEvent37 = new WaterEvent("2020-8-24 02:30:00", 5, true, plant10, 10L);
         waterEventRepository.save(waterEvent37);
-
-        WaterEvent waterEvent38 = new WaterEvent("2020-8-25 02:30:00", 5, true, plant10, 10L);
         waterEventRepository.save(waterEvent38);
-
-        WaterEvent waterEvent39 = new WaterEvent("2020-8-26 02:30:00", 5, true, plant10, 10L);
         waterEventRepository.save(waterEvent39);
 
         Harvest harvest01 = new Harvest("2022-8-25", 5, plant07);

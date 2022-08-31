@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components"
 
+
 const ClickableDiv = styled.div`
 background-color: aquamarine;
 `
@@ -57,23 +58,19 @@ const Bed = ({ bed, onBedClick }) => {
             const event2diff = dataDict.event2.emptied - dataDict.event2.filled
             const event3diff = dataDict.event3.emptied - dataDict.event3.filled
             const averageseconds = (event1diff + event2diff + event3diff) / 3
-            console.log(averageseconds)
             const days = Math.floor(averageseconds / 86400)
             const hours = Math.floor((averageseconds - (86400 * days)) / 3600)
             const minutes = Math.floor((averageseconds - (86400 * days) - (3600 * hours)) / 60)
-            console.log(`days: ${days}`)
-            console.log(`hours: ${hours}`)
-            console.log(`minutes: ${minutes}`)
-            // console.log `seconds: ${days}`
-
-            return `${days}D, ${hours}H, ${minutes}M`
+            const seconds = Math.floor((averageseconds - (86400 * days) - (3600 * hours) - (60 * minutes)) / 60)
+            return `${days}D, ${hours}H, ${minutes}M, ${seconds}S`
         } else {
             return 'Not enough data yet'
         }
     }
 
     const smartBedData = () => {
-        const value = bed.waterSensorReservoirEvents.findLast((event) => event.wet === true)
+        const dateString = bed.waterSensorReservoirEvents.findLast((event) => event.wet === true)
+
         return (
             <table>
                 <tbody>
@@ -83,7 +80,10 @@ const Bed = ({ bed, onBedClick }) => {
                     </tr>
                     <tr>
                         <td>Last filled: </td>
-                        <td>{value.eventDateTime}</td>
+                        <td>
+                            <p>{new Date(dateString.eventDateTime).toDateString()}</p>
+                            <p>{new Date(dateString.eventDateTime).toLocaleTimeString()}</p>
+                        </td>
                     </tr>
                     <tr>
                         <td>Reservoir is: </td>
@@ -95,7 +95,6 @@ const Bed = ({ bed, onBedClick }) => {
                     </tr>
                 </tbody>
             </table>
-
         )
     }
 

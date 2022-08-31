@@ -10,16 +10,13 @@ padding: 0.25rem;
 `
 
 const WaterEvent = ({ waterEvent }) => {
-
-    const dateWatered = Math.floor(new Date(waterEvent.eventDateTime).getTime() / 1000)
-    if (dateWatered === 1661542200) {
-        console.log('here')
-    }
     return (
         <ClickableDiv>
             <WaterDiv>
-                <p>Watered on: {waterEvent.eventDateTime}</p>
-                <p>Amount: {waterEvent.duration}0ml</p>
+                <p>Watered</p>
+                <p>on: {new Date(waterEvent.eventDateTime).toDateString()}</p>
+                <p>at: {new Date(waterEvent.eventDateTime).toLocaleTimeString()}</p>
+                <p>with: {waterEvent.duration}0ml</p>
             </WaterDiv>
         </ClickableDiv>
     )
