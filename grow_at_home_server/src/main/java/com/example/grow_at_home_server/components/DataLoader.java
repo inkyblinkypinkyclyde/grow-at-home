@@ -42,30 +42,30 @@ public class DataLoader implements ApplicationRunner {
         bedRepository.save(bed20);
         Bed bed21 = new Bed("Salads", 1000, garden2);
         bedRepository.save(bed21);
-        Plant plant01 = new Plant("Rose bush", "Red Fountain", null, "roses", Units.INTEGERS, "2022-8-23", bed00);
+        Plant plant01 = new Plant("Rose bush", "Red Fountain", null, "roses", Units.INTEGERS, "2022-8-23", bed00, 0, 0, 0);
         plantRepository.save(plant01);
-        Plant plant02 = new Plant("Rose Bush", "French Rose", null, "roses", Units.INTEGERS, "2022-8-23", bed00);
+        Plant plant02 = new Plant("Rose Bush", "French Rose", null, "roses", Units.INTEGERS, "2022-8-23", bed00, 0, 0, 0);
         plantRepository.save(plant02);
-        Plant plant03 = new Plant("Pumpkin", "Pumpinus Pumkininus", null, "pumpkins", Units.GRAMS, "2022-8-23", bed01);
+        Plant plant03 = new Plant("Pumpkin", "Pumpinus Pumkininus", null, "pumpkins", Units.GRAMS, "2022-8-23", bed01, 0, 0, 0);
         plantRepository.save(plant03);
-        Plant plant04 = new Plant("Cauliflowers", "Cruciferous Caulifowerus", null, "caulifowers", Units.GRAMS, "2022-8-23", bed10);
+        Plant plant04 = new Plant("Cauliflowers", "Cruciferous Caulifowerus", null, "caulifowers", Units.GRAMS, "2022-8-23", bed10, 0, 0, 0);
         plantRepository.save(plant04);
-        Plant plant05 = new Plant("Main crop", "Potatus Spudicum", null, "spuds", Units.GRAMS, "2022-8-23", bed11);
+        Plant plant05 = new Plant("Main crop", "Potatus Spudicum", null, "spuds", Units.GRAMS, "2022-8-23", bed11, 0, 0, 0);
         plantRepository.save(plant05);
-        Plant plant06 = new Plant("Corn", "Corninus of the Cobbibus", null, "corn", Units.CENTIMETERS, "2022-8-23", bed20);
+        Plant plant06 = new Plant("Corn", "Corninus of the Cobbibus", null, "corn", Units.CENTIMETERS, "2022-8-23", bed20, 1, 2, 3);
         plantRepository.save(plant06);
-        Plant plant11 = new Plant("Red Onions", "Onnionus Onnunaricus", null, "onions", Units.INTEGERS, "2022-8-23", bed20);
+        Plant plant11 = new Plant("Red Onions", "Onnionus Onnunaricus", null, "onions", Units.INTEGERS, "2022-8-23", bed20, 1, 2, 3);
         plantRepository.save(plant11);
-        Plant plant12 = new Plant("Red Chillis", "Muchos Spicicus", null, "chillies", Units.INTEGERS, "2022-8-23", bed20);
+        Plant plant12 = new Plant("Red Chillis", "Muchos Spicicus", null, "chillies", Units.INTEGERS, "2022-8-23", bed20, 0, 0, 0);
         plantRepository.save(plant12);
-        Plant plant13 = new Plant("Cauliflower", "Whitus Brocolus", null, "caulifower", Units.INTEGERS, "2022-8-23", bed20);
+        Plant plant13 = new Plant("Cauliflower", "Whitus Brocolus", null, "caulifower", Units.INTEGERS, "2022-8-23", bed20, 0, 0, 0);
         plantRepository.save(plant13);
 
 
-        Plant plant07 = new Plant("Broccoli", "Broccolus Brocollilicus", null, "broccoli shoots", Units.GRAMS, "2022-8-23", bed21);
-        Plant plant08 = new Plant("Radish", "Spicucus Redvegicus", null, "Raddish shoots", Units.GRAMS, "2022-8-23", bed21);
-        Plant plant09 = new Plant("Red Cabbage", "Cabbagicum Cabaragicus", null, "red cabbage shoots", Units.GRAMS, "2022-8-23", bed21);
-        Plant plant10 = new Plant("Brussel Sprouts", "Brusselus Tasteslikefarticus", null, "brussel sprout shoots", Units.GRAMS, "2022-8-23", bed21);
+        Plant plant07 = new Plant("Broccoli", "Broccolus Brocollilicus", null, "broccoli shoots", Units.GRAMS, "2022-8-23", bed21, 0, 0, 0);
+        Plant plant08 = new Plant("Radish", "Spicucus Redvegicus", null, "Raddish shoots", Units.GRAMS, "2022-8-23", bed21, 0, 0, 0);
+        Plant plant09 = new Plant("Red Cabbage", "Cabbagicum Cabaragicus", null, "red cabbage shoots", Units.GRAMS, "2022-8-23", bed21, 0, 0, 0);
+        Plant plant10 = new Plant("Brussel Sprouts", "Brusselus Tasteslikefarticus", null, "brussel sprout shoots", Units.GRAMS, "2022-8-23", bed21, 0, 0, 0);
 
         WaterEvent waterEvent00 = new WaterEvent("2022-8-23 02:30:00", 5, true, plant07, 7L);
         plant07.addWaterEvent(waterEvent00);

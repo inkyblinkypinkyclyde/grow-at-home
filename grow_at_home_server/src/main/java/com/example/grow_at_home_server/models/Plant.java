@@ -37,6 +37,15 @@ public class Plant {
     @Column(name = "thirstyMultiplier")
     private double thirstyMultiplier;
 
+    @Column(name = "soilSensor")
+    private int soilSensor;
+
+    @Column(name = "overfillSensor")
+    private int overfillSensor;
+
+    @Column(name = "pump")
+    private int pump;
+
     @JsonIgnoreProperties({"plant"})
     @OneToMany(mappedBy = "plant", fetch = FetchType.LAZY, cascade = CascadeType.REMOVE, orphanRemoval = true)
     private List<WaterEvent> waterEvents;
@@ -45,7 +54,7 @@ public class Plant {
     @JoinColumn(name = "bed_id", nullable = false)
     private Bed bed;
 
-    public Plant(String name, String species, String tag, String produces, Units units, String dateAdded, Bed bed) {
+    public Plant(String name, String species, String tag, String produces, Units units, String dateAdded, Bed bed, int soilSensor, int overfillSensor, int pump) {
         this.name = name;
         this.species = species;
         this.tag = tag;
@@ -58,9 +67,36 @@ public class Plant {
         this.bed = bed;
         this.averageWaterInterval = 0;
         this.thirstyMultiplier = 1;
+        this.soilSensor = soilSensor;
+        this.overfillSensor = overfillSensor;
+        this.pump = pump;
     }
 
     public Plant() {
+    }
+
+    public int getSoilSensor() {
+        return soilSensor;
+    }
+
+    public void setSoilSensor(int soilSensor) {
+        this.soilSensor = soilSensor;
+    }
+
+    public int getOverfillSensor() {
+        return overfillSensor;
+    }
+
+    public void setOverfillSensor(int overfillSensor) {
+        this.overfillSensor = overfillSensor;
+    }
+
+    public int getPump() {
+        return pump;
+    }
+
+    public void setPump(int pump) {
+        this.pump = pump;
     }
 
     public double getThirstyMultiplier() {
