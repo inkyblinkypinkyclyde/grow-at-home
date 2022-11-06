@@ -9,7 +9,7 @@ git clone https://github.com/inkyblinkypinkyclyde/grow-at-home
 ```
 
 
-This project consists of three parts the Python app designed to run on a Raspberry Pi, the:
+This project consists of three parts the Python app designed to run on a Raspberry Pi, the Java server running a Spring Boot app and a React.JS front end.
 
 ## The React.JS Front End
 
@@ -36,11 +36,29 @@ This uses was built using Maven and uses the Spring Boot framework and stores da
 
 This was built on a Raspberry Pi (3 Model B) and uses a system of relays and pumps to irrigate the plants.
 
-To run the script simply run the copy the sbc directory to the Raspberry pi and run the automatic_control.py.
+In order to setup the watering module I used capacitive moisture sensors and relays to control 5v pumps. Realistically, once complete this project could control pumps of any size and throughput.
+
+Below is the connection schema showing both physical pins and the BCM numbers.
+
+
+|Physical pin number| BCM Pin Number| attach to|
+|-|-|-|
+|3|2|Plant 1 sensor|
+|7|4|Plant 2 sensor|
+|12|18|Reservoir sensor|
+|15|22|Plant 1 pump|
+|16|23|Plant 2 pump|
+|18|24|Plant 3 pump|
+|22|25|Plant 4 pump|
+|29|5|Plant 3 sensor|
+|31|6|Plant 4 sensor|
+
+
+
+Once this is all set up copy the sbc directory to the Raspberry pi and run automatic_control.py on the Raspberry Pi, It should now start passing JSONs over to the java server once the water sensors are triggered.
 
 
 ## Future improvements
-* Add wiring digram to readme
 * Add setup page to frontend
 * Refactor SBC to take data from the frontend during the setup phase and initialise from that.
 
